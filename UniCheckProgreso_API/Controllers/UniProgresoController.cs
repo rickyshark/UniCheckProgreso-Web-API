@@ -21,19 +21,28 @@ namespace UniCheckProgreso_API.Controllers
         [ProducesResponseType(404)]
         public ActionResult<CarreraDto> GetCarrera(int id)
         {
-            if (id <= 0)
+            try
             {
-                return BadRequest();
-            }
+                if (id <= 0)
+                {
+                    return BadRequest();
+                }
 
-            var carrera = CarreraStore.ListaCarrera.FirstOrDefault(c => c.ID_carrera == id);
+                var carrera = CarreraStore.ListaCarrera.FirstOrDefault(c => c.ID_carrera == id);
             
-            if (carrera == null)
-            {
-                return NotFound();
-            }
+                if (carrera == null)
+                {
+                    return NotFound();
+                }
 
-            return Ok(carrera);
+                return Ok(carrera);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
 
         }
     }
